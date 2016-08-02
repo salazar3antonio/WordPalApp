@@ -20,10 +20,7 @@ public class Constants {
     public static final String API_PRODUCTION_KEY = "VxKyScMn86mshAMSNaxk6IDI9bHQp1d13xnjsnPxFQYhKKEAMg";
 
     // URLs to be used to access the API
-    // END_POINT + {Requested Word} + GET
-    public static final String END_POINT = "https://wordsapiv1.p.mashape.com/words/";
-    public static final String GET_DEFINITIONS = END_POINT + "/definitions";
-    public static final String GET_SYNONYMS = END_POINT + "/synonyms";
+    public static final String END_POINT_URL = "https://twinword-word-association-quiz.p.mashape.com/type1/";
 
     //JSON body keys
     public static final String WORD = "word";
