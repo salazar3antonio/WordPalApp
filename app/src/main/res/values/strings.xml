@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Wordy Wordy</string>
+
+    <string name="displayed_word">Word to Define</string>
+    <string name="definition_one">Definition One</string>
+    <string name="definition_two">Definition Two</string>
+    <string name="definition_three">Definition Three</string>
 </resources>
