@@ -5,4 +5,7 @@
     <string name="definition_one">Definition One</string>
     <string name="definition_two">Definition Two</string>
     <string name="definition_three">Definition Three</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

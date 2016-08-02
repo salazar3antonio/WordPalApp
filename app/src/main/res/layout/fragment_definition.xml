@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.wordywordy.wordywordy.DefinitionFragment"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/main_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/displayed_word"
+        android:textSize="45dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/definition_choice_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:text="@string/definition_one"
+        android:textSize="30dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/definition_choice_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:text="@string/definition_two"
+        android:textSize="30dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/definition_choice_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:text="@string/definition_three"
+        android:textSize="30dp"
+        android:textStyle="normal" />
+
+</LinearLayout>
