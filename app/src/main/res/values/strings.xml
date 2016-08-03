@@ -1,11 +1,36 @@
 <resources>
     <string name="app_name">Wordy Wordy</string>
 
-    <string name="displayed_word">Word to Define</string>
-    <string name="definition_one">Definition One</string>
-    <string name="definition_two">Definition Two</string>
-    <string name="definition_three">Definition Three</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+      <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="take_quiz">Take Quiz!</string>
+
+    <string-array name="area_choice_spinner">
+        <item>(ES) Elementary School</item>
+        <item>(MS) Middle School</item>
+        <item>(HS) High School</item>
+        <item>(SAT) Scholastic Assessment Test</item>
+        <item>(GRE) Graduate Record Examinations</item>
+        <item>(GMAT) Graduate Management Admission Test</item>
+        <item>(TEPS) Test of English Proficiency</item>
+        <item>(TOEIC) Test of English for International Communication</item>
+        <item>(TOEFL) Test of English as a Foreign Language</item>
+        <item>(IELTS) International English Language Testing Service</item>
+        <item>(KSAT) Korean College Scholastic Ability Test</item>
+    </string-array>
+
+    <string-array name="level_choice_spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
 </resources>

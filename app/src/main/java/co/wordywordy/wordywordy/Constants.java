@@ -23,9 +23,10 @@ public class Constants {
     public static final String END_POINT_URL = "https://twinword-word-association-quiz.p.mashape.com/type1/";
 
     //JSON body keys
-    public static final String WORD = "word";
-    public static final String SYNONYMS = "synonyms";
-    public static final String DEFINITIONS = "definitions";
-    public static final String DEFINITION = "definition";
-
+    public static final String AREA = "area";
+    public static final String LEVEL = "level";
+    public static final String QUIZ_LIST = "quizlist";
+    public static final String QUIZ = "quiz";
+    public static final String OPTION = "option";
+    public static final String CORRECT = "correct";
 }
