@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-    android:gravity="center">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-
-    <Spinner
-        android:id="@+id/area_spinner"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        />
-
-    <Spinner
-        android:id="@+id/level_spinner"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Area"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginRight="8dp"/>
+
+        <Spinner
+            android:id="@+id/area_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficulty"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="10dp"/>
+
+        <Spinner
+            android:id="@+id/level_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/area_choice_text"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <Button
         android:id="@+id/take_quiz_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/take_quiz"/>
+        android:text="@string/take_quiz"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"/>
 
 </LinearLayout>

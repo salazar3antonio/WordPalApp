@@ -7,18 +7,32 @@
     <string name="take_quiz">Take Quiz!</string>
 
     <string-array name="area_choice_spinner">
-        <item>(ES) Elementary School</item>
-        <item>(MS) Middle School</item>
-        <item>(HS) High School</item>
-        <item>(SAT) Scholastic Assessment Test</item>
-        <item>(GRE) Graduate Record Examinations</item>
-        <item>(GMAT) Graduate Management Admission Test</item>
-        <item>(TEPS) Test of English Proficiency</item>
-        <item>(TOEIC) Test of English for International Communication</item>
-        <item>(TOEFL) Test of English as a Foreign Language</item>
-        <item>(IELTS) International English Language Testing Service</item>
-        <item>(KSAT) Korean College Scholastic Ability Test</item>
+        <item>ES</item>
+        <item>MS</item>
+        <item>HS</item>
+        <item>SAT</item>
+        <item>GRE</item>
+        <item>GMAT</item>
+        <item>TEPS</item>
+        <item>TOEIC</item>
+        <item>TOEFL</item>
+        <item>IELTS</item>
+        <item>KSAT</item>
     </string-array>
+
+    <string name="area_choice_text">
+        ES - Elementary School
+        \nMS - Middle School
+        \nHS - High School
+        \nSAT - Scholastic Assessment Test
+        \nGRE - Graduate Record Examinations
+        \nGMAT - Graduate Management Admission Test
+        \nTEPS - Test of English Proficiency
+        \nTOEIC - Test of English for International Communication
+        \nTOEFL - Test of English as a Foreign Language
+        \nIELTS - International English Language Testing Service
+        \nKSAT - Korean College Scholastic Ability Test
+    </string>
 
     <string-array name="level_choice_spinner">
         <item>1</item>
