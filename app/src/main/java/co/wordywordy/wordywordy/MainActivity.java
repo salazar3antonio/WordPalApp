@@ -7,7 +7,7 @@ public class MainActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return QuizSetupFragment.newInstance("asdf", "asdfs");
+        return QuizSetupFragment.newInstance();
 
     }
 
