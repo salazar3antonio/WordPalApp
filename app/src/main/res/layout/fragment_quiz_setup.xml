@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="co.wordywordy.wordywordy.QuizSetupFragment"
+              android:gravity="center"
+              android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -42,13 +44,6 @@
 
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/area_choice_text"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-
     <Button
         android:id="@+id/take_quiz_button"
         android:layout_width="wrap_content"
@@ -56,6 +51,6 @@
         android:text="@string/take_quiz"
         android:layout_marginTop="30dp"
         android:textAppearance="?android:textAppearanceLarge"
-        style="@android:style/Widget.Material.Button.Borderless.Colored"/>
+        />
 
 </LinearLayout>
