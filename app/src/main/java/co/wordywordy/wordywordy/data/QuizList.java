@@ -9,11 +9,6 @@ public class QuizList {
     private String area;
     private int score;
 
-    public QuizList(int level, String area) {
-        this.level = level;
-        this.area = area;
-    }
-
     public int getLevel() {
         return level;
     }
