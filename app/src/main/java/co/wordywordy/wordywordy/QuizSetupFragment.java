@@ -1,5 +1,6 @@
 package co.wordywordy.wordywordy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import co.wordywordy.wordywordy.data.QuizList;
 
 
 public class QuizSetupFragment extends Fragment {
+
+    public static final String AREA_SELECTED = "area_selected";
+    public static final String LEVEL_SELECTED = "level_selected";
 
     private RadioGroup mAreaRadioGroup;
     private RadioGroup mLevelRadioGroup;
@@ -60,7 +64,7 @@ public class QuizSetupFragment extends Fragment {
                         mQuizList.setArea("sat");
                         break;
                     case R.id.all_radio:
-                        mQuizList.setArea("oeverall");
+                        mQuizList.setArea("overall");
                         break;
                 }
             }
@@ -93,7 +97,10 @@ public class QuizSetupFragment extends Fragment {
         mTakeQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getContext(), QuizListActivity.class);
+                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
+                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
+                startActivity(intent);
             }
         });
 
