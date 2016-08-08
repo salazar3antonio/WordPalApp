@@ -3,30 +3,62 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:gravity="center_vertical"
               tools:context=".QuizListFragment">
 
 
     <TextView
-        android:id="@+id/area_test"
+        android:id="@+id/optionOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="14dp"
-        android:paddingTop="14dp"
-        android:textSize="30dp"
-        tools:text="Testing"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
         android:textStyle="normal"
-        android:layout_gravity="center_horizontal"/>
+        tools:text="option 1"/>
 
     <TextView
-        android:id="@+id/level_test"
+        android:id="@+id/optionTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="14dp"
-        android:paddingTop="14dp"
-        tools:text="Testing"
-
-        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
         android:textStyle="normal"
-        android:layout_gravity="center_horizontal"/>
+        tools:text="option 2"/>
+
+    <TextView
+        android:id="@+id/optionThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
+        android:textStyle="normal"
+        tools:text="option 3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/choiceOne_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Choice 1"
+            android:layout_margin="15dp"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/choiceTwo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:text="Choice 2"
+            android:layout_margin="15dp"
+            android:textSize="25sp"/>
+
+
+
+    </LinearLayout>
 
 </LinearLayout>
