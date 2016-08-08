@@ -14,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
         android:textStyle="normal"
-        tools:text="option 1"/>
+        android:text="option 1"/>
 
     <TextView
         android:id="@+id/optionTwo"
@@ -23,7 +23,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
         android:textStyle="normal"
-        tools:text="option 2"/>
+        android:text="option 2"/>
 
     <TextView
         android:id="@+id/optionThree"
@@ -32,7 +32,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
         android:textStyle="normal"
-        tools:text="option 3"/>
+        android:text="option 3"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:id="@+id/choiceOne_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Choice 1"
+            android:text="Choice 1"
             android:layout_margin="15dp"
             android:textSize="25sp"/>
 
@@ -53,7 +53,7 @@
             android:id="@+id/choiceTwo_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:text="Choice 2"
+            android:text="Choice 2"
             android:layout_margin="15dp"
             android:textSize="25sp"/>
 

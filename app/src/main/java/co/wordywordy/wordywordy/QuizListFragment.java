@@ -50,11 +50,6 @@ public class QuizListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
 
-        mAreaTest = (TextView) view.findViewById(R.id.area_test);
-        mLevelTest = (TextView) view.findViewById(R.id.level_test);
-
-        mAreaTest.setText(mArea);
-
         Toast.makeText(getContext(), "The Level " + mLevel, Toast.LENGTH_LONG).show();
 
         return view;
