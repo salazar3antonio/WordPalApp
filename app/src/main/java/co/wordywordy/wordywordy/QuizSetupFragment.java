@@ -1,19 +1,27 @@
 package co.wordywordy.wordywordy;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import co.wordywordy.wordywordy.data.QuizList;
+import co.wordywordy.wordywordy.web.JSONParser;
 
 
 public class QuizSetupFragment extends Fragment {
 
+    public static final String TAG = QuizSetupFragment.class.getName();
     public static final String AREA_SELECTED = "area_selected";
     public static final String LEVEL_SELECTED = "level_selected";
 
@@ -21,6 +29,8 @@ public class QuizSetupFragment extends Fragment {
     private RadioGroup mLevelRadioGroup;
     private Button mTakeQuizButton;
     private QuizList mQuizList;
+
+    private JSONArray mQuizListArray;
 
     public QuizSetupFragment() {
         // Required empty public constructor
@@ -97,6 +107,7 @@ public class QuizSetupFragment extends Fragment {
         mTakeQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new JSONParse().execute();
                 Intent intent = new Intent(getContext(), QuizListActivity.class);
                 intent.putExtra(AREA_SELECTED, mQuizList.getArea());
                 intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
@@ -104,8 +115,39 @@ public class QuizSetupFragment extends Fragment {
             }
         });
 
-
         return view;
+    }
+
+    public class JSONParse extends AsyncTask<String, String, JSONObject> {
+
+        @Override
+        protected JSONObject doInBackground(String... strings) {
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = jsonParser.getJSONObjectFromURL("https://twinword-word-association-quiz.p.mashape.com/type1/?area=sat&level=3");
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+
+            try {
+                mQuizListArray = jsonObject.getJSONArray(Constants.QUIZ_LIST);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                JSONObject jsonObject1 = mQuizListArray.getJSONObject(0);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.d(TAG, "QuizListArray " + mQuizListArray.toString());
+
+
+
+
+        }
     }
 
 }
