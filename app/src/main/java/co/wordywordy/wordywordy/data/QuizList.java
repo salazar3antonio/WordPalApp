@@ -5,7 +5,7 @@ package co.wordywordy.wordywordy.data;
  */
 public class QuizList {
 
-    private int level;
+    private String level;
     private String area;
     private int score;
     private String optionOne;
@@ -63,11 +63,11 @@ public class QuizList {
         isCorrect = correct;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 

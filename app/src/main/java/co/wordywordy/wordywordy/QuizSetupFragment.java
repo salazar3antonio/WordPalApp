@@ -2,7 +2,6 @@ package co.wordywordy.wordywordy;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,19 +86,19 @@ public class QuizSetupFragment extends Fragment {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (mLevelRadioGroup.getCheckedRadioButtonId()) {
                     case R.id.two_radio:
-                        mQuizList.setLevel(2);
+                        mQuizList.setLevel("2");
                         break;
                     case R.id.four_radio:
-                        mQuizList.setLevel(4);
+                        mQuizList.setLevel("4");
                         break;
                     case R.id.six_radio:
-                        mQuizList.setLevel(6);
+                        mQuizList.setLevel("6");
                         break;
                     case R.id.eight_radio:
-                        mQuizList.setLevel(8);
+                        mQuizList.setLevel("8");
                         break;
                     case R.id.ten_radio:
-                        mQuizList.setLevel(10);
+                        mQuizList.setLevel("10");
                         break;
                 }
             }
@@ -121,17 +120,18 @@ public class QuizSetupFragment extends Fragment {
         return view;
     }
 
-    private class CallAPI extends AsyncTask<String, IntegerRes, HttpResponse<JsonNode>> {
+    private class CallAPI extends AsyncTask<String, Integer, HttpResponse<JsonNode>> {
 
         @Override
         protected HttpResponse<JsonNode> doInBackground(String... strings) {
             HttpResponse<JsonNode> request = null;
             try {
-                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area=sat&level=3")
-                        .header("X-Mashape-Authorization", "VxKyScMn86mshAMSNaxk6IDI9bHQp1d13xnjsnPxFQYhKKEAMg")
+                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area={area}&level={level}")
+                        .header("X-Mashape-Authorization", Constants.API_PRODUCTION_KEY)
+                        .routeParam("area", mQuizList.getArea())
+                        .routeParam("level", mQuizList.getLevel())
                         .asJson();
             } catch (UnirestException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -139,10 +139,10 @@ public class QuizSetupFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(HttpResponse<JsonNode> jsonNodeHttpResponse) {
-            super.onPostExecute(jsonNodeHttpResponse);
-            String answer = jsonNodeHttpResponse.getBody().toString();
-            Log.d(TAG, answer);
+        protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
+            super.onPostExecute(jsonResponse);
+            String quizListResponse = jsonResponse.getBody().toString();
+            Log.d(TAG, quizListResponse);
         }
     }
 
