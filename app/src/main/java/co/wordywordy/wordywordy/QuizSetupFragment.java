@@ -1,8 +1,8 @@
 package co.wordywordy.wordywordy;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import co.wordywordy.wordywordy.data.QuizList;
-import co.wordywordy.wordywordy.web.JSONParser;
 
 
 public class QuizSetupFragment extends Fragment {
@@ -107,46 +109,40 @@ public class QuizSetupFragment extends Fragment {
         mTakeQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new JSONParse().execute();
-                Intent intent = new Intent(getContext(), QuizListActivity.class);
-                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
-                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
-                startActivity(intent);
+                new CallAPI().execute();
+
+//                Intent intent = new Intent(getContext(), QuizListActivity.class);
+//                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
+//                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
+//                startActivity(intent);
             }
         });
 
         return view;
     }
 
-    public class JSONParse extends AsyncTask<String, String, JSONObject> {
+    private class CallAPI extends AsyncTask<String, IntegerRes, HttpResponse<JsonNode>> {
 
         @Override
-        protected JSONObject doInBackground(String... strings) {
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = jsonParser.getJSONObjectFromURL("https://twinword-word-association-quiz.p.mashape.com/type1/?area=sat&level=3");
-            return jsonObject;
+        protected HttpResponse<JsonNode> doInBackground(String... strings) {
+            HttpResponse<JsonNode> request = null;
+            try {
+                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area=sat&level=3")
+                        .header("X-Mashape-Authorization", "VxKyScMn86mshAMSNaxk6IDI9bHQp1d13xnjsnPxFQYhKKEAMg")
+                        .asJson();
+            } catch (UnirestException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            return request;
         }
 
         @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            super.onPostExecute(jsonObject);
-
-            try {
-                mQuizListArray = jsonObject.getJSONArray(Constants.QUIZ_LIST);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                JSONObject jsonObject1 = mQuizListArray.getJSONObject(0);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Log.d(TAG, "QuizListArray " + mQuizListArray.toString());
-
-
-
-
+        protected void onPostExecute(HttpResponse<JsonNode> jsonNodeHttpResponse) {
+            super.onPostExecute(jsonNodeHttpResponse);
+            String answer = jsonNodeHttpResponse.getBody().toString();
+            Log.d(TAG, answer);
         }
     }
 
