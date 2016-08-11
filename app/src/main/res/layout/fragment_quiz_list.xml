@@ -6,55 +6,70 @@
               android:gravity="center_vertical"
               tools:context=".QuizListFragment">
 
-
-    <TextView
-        android:id="@+id/optionOne"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="30sp"
-        android:textStyle="normal"
-        android:text="option 1"/>
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:id="@+id/optionTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="30sp"
-        android:textStyle="normal"
-        android:text="option 2"/>
 
-    <TextView
-        android:id="@+id/optionThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="30sp"
-        android:textStyle="normal"
-        android:text="option 3"/>
+        <TextView
+            android:id="@+id/optionOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="23sp"
+            android:textStyle="normal"
+            android:text="option 1"
+            />
+
+        <TextView
+            android:id="@+id/optionTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="23sp"
+            android:textStyle="normal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="option 2"/>
+
+        <TextView
+            android:id="@+id/optionThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="23sp"
+            android:textStyle="normal"
+            android:text="option 3"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="20dp">
+        >
 
         <Button
             android:id="@+id/choiceOne_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choice 1"
-            android:layout_margin="15dp"
+            android:layout_marginRight="10dp"
             android:textSize="25sp"/>
 
         <Button
             android:id="@+id/choiceTwo_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:text="Choice 2"
-            android:layout_margin="15dp"
+
             android:textSize="25sp"/>
 
 

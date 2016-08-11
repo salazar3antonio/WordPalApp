@@ -16,6 +16,8 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import co.wordywordy.wordywordy.data.QuizList;
 
@@ -141,8 +143,25 @@ public class QuizSetupFragment extends Fragment {
         @Override
         protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
             super.onPostExecute(jsonResponse);
-            String quizListResponse = jsonResponse.getBody().toString();
-            Log.d(TAG, quizListResponse);
+
+            String toLog;
+            JSONObject jsonObject = jsonResponse.getBody().getObject();
+            JSONArray jsonArray = null;
+            try {
+                jsonArray = jsonObject.getJSONArray("quizlist");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                toLog = jsonArray.get(0).toString();
+                Log.d(TAG, toLog);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+
         }
     }
 
