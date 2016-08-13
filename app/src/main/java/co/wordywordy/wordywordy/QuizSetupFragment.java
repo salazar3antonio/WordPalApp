@@ -1,5 +1,6 @@
 package co.wordywordy.wordywordy;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,7 +34,8 @@ public class QuizSetupFragment extends Fragment {
     private Button mTakeQuizButton;
     private QuizList mQuizList;
 
-    private JSONArray mQuizListArray;
+    private JSONObject mJSONResponseObject = null;
+    private JSONArray mQuizListArray = null;
 
     public QuizSetupFragment() {
         // Required empty public constructor
@@ -50,7 +52,7 @@ public class QuizSetupFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         //inflate view and pass in the container ViewGroup
@@ -112,10 +114,10 @@ public class QuizSetupFragment extends Fragment {
             public void onClick(View view) {
                 new CallAPI().execute();
 
-//                Intent intent = new Intent(getContext(), QuizListActivity.class);
-//                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
-//                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(), QuizListActivity.class);
+                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
+                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
+                startActivity(intent);
             }
         });
 
@@ -128,6 +130,7 @@ public class QuizSetupFragment extends Fragment {
         protected HttpResponse<JsonNode> doInBackground(String... strings) {
             HttpResponse<JsonNode> request = null;
             try {
+
                 request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area={area}&level={level}")
                         .header("X-Mashape-Authorization", Constants.API_PRODUCTION_KEY)
                         .routeParam("area", mQuizList.getArea())
@@ -144,25 +147,27 @@ public class QuizSetupFragment extends Fragment {
         protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
             super.onPostExecute(jsonResponse);
 
-            String toLog;
-            JSONObject jsonObject = jsonResponse.getBody().getObject();
-            JSONArray jsonArray = null;
+            String quizOne;
             try {
-                jsonArray = jsonObject.getJSONArray("quizlist");
+                    mJSONResponseObject = jsonResponse.getBody().getObject();
+                    mQuizListArray = mJSONResponseObject.getJSONArray("quizlist");
+                    Log.d(TAG, mQuizListArray.toString());
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            try {
-                toLog = jsonArray.get(0).toString();
-                Log.d(TAG, toLog);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
 
 
         }
+
+//        public boolean hasInternetConnection(Context context) {
+//            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//            // return if device has network connection. all properties must not return null or true.
+//            return connectivityManager != null &&
+//                    connectivityManager.getActiveNetworkInfo() != null &&
+//                    connectivityManager.getActiveNetworkInfo().isConnected();
+//        }
     }
 
 }
