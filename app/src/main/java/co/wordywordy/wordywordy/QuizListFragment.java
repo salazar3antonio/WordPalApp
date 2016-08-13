@@ -5,30 +5,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class QuizListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String AREA = "area";
-    private static final String LEVEL = "level";
 
-    private String mArea;
-    private int mLevel;
-    private TextView mAreaTest;
-    private TextView mLevelTest;
+    public static final String JSON_Response = "json_response";
+
+    private String mJSONasString;
 
     public QuizListFragment() {
         // Required empty public constructor
     }
 
-    public static QuizListFragment newInstance(String area, int level) {
+    public static QuizListFragment newInstance(String jsonResponse) {
         QuizListFragment fragment = new QuizListFragment();
         Bundle args = new Bundle();
-        args.putString(AREA, area);
-        args.putInt(LEVEL, level);
+        args.putString(JSON_Response, jsonResponse);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,8 +30,8 @@ public class QuizListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mArea = getArguments().getString(AREA);
-            mLevel = getArguments().getInt(LEVEL);
+            mJSONasString = getArguments().getString(JSON_Response);
+
         }
 
 
@@ -50,7 +43,7 @@ public class QuizListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
 
-        Toast.makeText(getContext(), "The Level " + mLevel, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Passed JSON " + mJSONasString, Toast.LENGTH_LONG).show();
 
         return view;
     }

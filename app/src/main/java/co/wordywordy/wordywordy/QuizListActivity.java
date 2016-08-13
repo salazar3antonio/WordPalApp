@@ -8,8 +8,7 @@ import android.support.v4.app.Fragment;
  */
 public class QuizListActivity extends SingleFragmentActivity {
 
-    private String mArea;
-    private int mLevel;
+    private String mJSONasString;
 
 
     @Override
@@ -17,10 +16,9 @@ public class QuizListActivity extends SingleFragmentActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            mArea = bundle.getString(QuizSetupFragment.AREA_SELECTED);
-            mLevel = bundle.getInt(QuizSetupFragment.LEVEL_SELECTED);
+            mJSONasString = bundle.getString(QuizSetupFragment.JSON_RESPONSE);
         }
 
-        return QuizListFragment.newInstance(mArea, mLevel);
+        return QuizListFragment.newInstance(mJSONasString);
     }
 }

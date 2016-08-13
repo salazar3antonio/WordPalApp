@@ -1,5 +1,7 @@
 package co.wordywordy.wordywordy.data;
 
+import org.json.JSONObject;
+
 /**
  * Created by salaz on 8/2/2016.
  */
@@ -8,12 +10,21 @@ public class QuizList {
     private String level;
     private String area;
     private int score;
+    private JSONObject jsonResponse;
     private String optionOne;
     private String optionTwo;
     private String optionThree;
     private String choiceOne;
     private String choiceTwo;
     private boolean isCorrect;
+
+    public JSONObject getJsonResponse() {
+        return jsonResponse;
+    }
+
+    public void setJsonResponse(JSONObject jsonResponse) {
+        this.jsonResponse = jsonResponse;
+    }
 
     public String getOptionOne() {
         return optionOne;

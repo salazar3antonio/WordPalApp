@@ -1,5 +1,6 @@
 package co.wordywordy.wordywordy;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import co.wordywordy.wordywordy.data.QuizList;
@@ -26,13 +26,16 @@ public class QuizSetupFragment extends Fragment {
     public static final String TAG = QuizSetupFragment.class.getName();
     public static final String AREA_SELECTED = "area_selected";
     public static final String LEVEL_SELECTED = "level_selected";
+    public static final String JSON_RESPONSE = "json_response";
+
 
     private RadioGroup mAreaRadioGroup;
     private RadioGroup mLevelRadioGroup;
     private Button mTakeQuizButton;
     private QuizList mQuizList;
 
-    private JSONArray mQuizListArray;
+    private JSONObject mJSONObject;
+    private String mJSON_String;
 
     public QuizSetupFragment() {
         // Required empty public constructor
@@ -109,12 +112,15 @@ public class QuizSetupFragment extends Fragment {
         mTakeQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CallAPI().execute();
+                try {
+                    new CallAPI().execute();
+                } finally {
+                    Intent intent = new Intent(getContext(), QuizListActivity.class);
+                    intent.putExtra(JSON_RESPONSE, mJSON_String);
+                    startActivity(intent);
 
-//                Intent intent = new Intent(getContext(), QuizListActivity.class);
-//                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
-//                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
-//                startActivity(intent);
+                }
+
             }
         });
 
@@ -143,8 +149,9 @@ public class QuizSetupFragment extends Fragment {
         protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
             super.onPostExecute(jsonResponse);
 
-            JSONObject jsonObject = jsonResponse.getBody().getObject();
-            Log.d(TAG, jsonObject.toString());
+            mQuizList.setJsonResponse(jsonResponse.getBody().getObject());
+            mJSON_String = mQuizList.getJsonResponse().toString();
+            Log.d(TAG, mQuizList.getJsonResponse().toString());
 
 
 
