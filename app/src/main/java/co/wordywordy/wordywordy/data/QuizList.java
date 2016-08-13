@@ -1,7 +1,5 @@
 package co.wordywordy.wordywordy.data;
 
-import org.json.JSONArray;
-
 /**
  * Created by salaz on 8/2/2016.
  */
@@ -16,15 +14,6 @@ public class QuizList {
     private String choiceOne;
     private String choiceTwo;
     private boolean isCorrect;
-    private JSONArray quizListArray;
-
-    public JSONArray getQuizListArray() {
-        return quizListArray;
-    }
-
-    public void setQuizListArray(JSONArray quizListArray) {
-        this.quizListArray = quizListArray;
-    }
 
     public String getOptionOne() {
         return optionOne;

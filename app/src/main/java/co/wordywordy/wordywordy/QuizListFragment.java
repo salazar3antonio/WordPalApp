@@ -16,7 +16,7 @@ public class QuizListFragment extends Fragment {
     private static final String LEVEL = "level";
 
     private String mArea;
-    private String mLevel;
+    private int mLevel;
     private TextView mAreaTest;
     private TextView mLevelTest;
 
@@ -24,11 +24,11 @@ public class QuizListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static QuizListFragment newInstance(String area, String level) {
+    public static QuizListFragment newInstance(String area, int level) {
         QuizListFragment fragment = new QuizListFragment();
         Bundle args = new Bundle();
         args.putString(AREA, area);
-        args.putString(LEVEL, level);
+        args.putInt(LEVEL, level);
         fragment.setArguments(args);
         return fragment;
     }
@@ -38,7 +38,7 @@ public class QuizListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mArea = getArguments().getString(AREA);
-            mLevel = getArguments().getString(LEVEL);
+            mLevel = getArguments().getInt(LEVEL);
         }
 
 
@@ -50,7 +50,7 @@ public class QuizListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
 
-        Toast.makeText(getContext(), "The Level is " + mLevel, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "The Level " + mLevel, Toast.LENGTH_LONG).show();
 
         return view;
     }
