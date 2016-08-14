@@ -3,9 +3,12 @@ package co.wordywordy.wordywordy;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -26,9 +29,16 @@ public class QuizListFragment extends Fragment {
     public static final String AREA = "area";
     public static final String LEVEL = "level";
 
-    private TextView mOptionOne;
     private String mArea;
     private String mLevel;
+
+    private RecyclerView mQuizListRecyclerView;
+    private Button mChoiceOne;
+    private Button mChoiceTwo;
+    private TextView mOptionOne;
+    private TextView mOptionTwo;
+    private TextView mOptionThree;
+
     private JSONArray mJSONArray;
     private JSONObject mJSONObject;
     private String mJSONasString;
@@ -64,11 +74,57 @@ public class QuizListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
 
-        mOptionOne = (TextView) view.findViewById(R.id.optionOne);
+        mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
+
+
 
         // Toast.makeText(getContext(), "Passed JSON " + mJSONasString, Toast.LENGTH_LONG).show();
 
         return view;
+    }
+
+    public class ViewHolder  extends RecyclerView.ViewHolder {
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            mOptionOne = (TextView) itemView.findViewById(R.id.optionOne);
+            mOptionTwo = (TextView) itemView.findViewById(R.id.optionTwo);
+            mOptionThree = (TextView) itemView.findViewById(R.id.optionThree);
+            mChoiceOne = (Button) itemView.findViewById(R.id.choiceOne_button);
+            mChoiceTwo = (Button) itemView.findViewById(R.id.choiceTwo_button);
+
+        }
+    }
+
+    public class ViewAdapter extends RecyclerView.Adapter<ViewHolder> {
+
+        public ViewAdapter(JSONArray jsonArray) {
+            mJSONArray = jsonArray;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View view = layoutInflater.inflate(R.layout.quiz_list_item, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            String options = null;
+            try {
+                options = mJSONArray.getString(position);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            mOptionOne.setText(options);
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 10;
+        }
     }
 
     private class CallAPI extends AsyncTask<String, Integer, HttpResponse<JsonNode>> {
@@ -96,14 +152,12 @@ public class QuizListFragment extends Fragment {
             JSONObject jsonObject = jsonResponse.getBody().getObject();
             try {
                 mJSONArray = jsonObject.getJSONArray("quizlist");
-                JSONObject jsonObject1 = mJSONArray.getJSONObject(0);
-                mOptionOne.setText(jsonObject1.get("quiz").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-
-
+            mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mQuizListRecyclerView.setAdapter(new ViewAdapter(mJSONArray));
 
         }
 
