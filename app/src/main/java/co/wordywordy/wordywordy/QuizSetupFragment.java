@@ -1,20 +1,13 @@
 package co.wordywordy.wordywordy;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.json.JSONObject;
 
@@ -26,8 +19,6 @@ public class QuizSetupFragment extends Fragment {
     public static final String TAG = QuizSetupFragment.class.getName();
     public static final String AREA_SELECTED = "area_selected";
     public static final String LEVEL_SELECTED = "level_selected";
-    public static final String JSON_RESPONSE = "json_response";
-
 
     private RadioGroup mAreaRadioGroup;
     private RadioGroup mLevelRadioGroup;
@@ -112,51 +103,17 @@ public class QuizSetupFragment extends Fragment {
         mTakeQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    new CallAPI().execute();
-                } finally {
-                    Intent intent = new Intent(getContext(), QuizListActivity.class);
-                    intent.putExtra(JSON_RESPONSE, mJSON_String);
-                    startActivity(intent);
-
-                }
+                Intent intent = new Intent(getContext(), QuizListActivity.class);
+                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
+                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
+                startActivity(intent);
 
             }
+
         });
 
         return view;
     }
 
-    private class CallAPI extends AsyncTask<String, Integer, HttpResponse<JsonNode>> {
-
-        @Override
-        protected HttpResponse<JsonNode> doInBackground(String... strings) {
-            HttpResponse<JsonNode> request = null;
-            try {
-                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area={area}&level={level}")
-                        .header("X-Mashape-Authorization", Constants.API_PRODUCTION_KEY)
-                        .routeParam("area", mQuizList.getArea())
-                        .routeParam("level", mQuizList.getLevel())
-                        .asJson();
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            }
-
-            return request;
-        }
-
-        @Override
-        protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
-            super.onPostExecute(jsonResponse);
-
-            mQuizList.setJsonResponse(jsonResponse.getBody().getObject());
-            mJSON_String = mQuizList.getJsonResponse().toString();
-            Log.d(TAG, mQuizList.getJsonResponse().toString());
-
-
-
-
-        }
-    }
 
 }
