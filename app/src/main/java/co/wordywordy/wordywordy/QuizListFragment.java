@@ -1,20 +1,13 @@
 package co.wordywordy.wordywordy;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +56,7 @@ public class QuizListFragment extends Fragment {
         if (getArguments() != null) {
             mArea = getArguments().getString(AREA);
             mLevel = getArguments().getString(LEVEL);
-            new CallAPI().execute();
+           // new CallAPI().execute();
 
         }
     }
@@ -127,42 +120,42 @@ public class QuizListFragment extends Fragment {
         }
     }
 
-    private class CallAPI extends AsyncTask<String, Integer, HttpResponse<JsonNode>> {
-
-        @Override
-        protected HttpResponse<JsonNode> doInBackground(String... strings) {
-            HttpResponse<JsonNode> request = null;
-            try {
-                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area={area}&level={level}")
-                        .header("X-Mashape-Authorization", Constants.API_PRODUCTION_KEY)
-                        .routeParam("area", mArea)
-                        .routeParam("level", mLevel)
-                        .asJson();
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            }
-
-            return request;
-        }
-
-        @Override
-        protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
-            super.onPostExecute(jsonResponse);
-
-            JSONObject jsonObject = jsonResponse.getBody().getObject();
-            try {
-                mJSONArray = jsonObject.getJSONArray("quizlist");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mQuizListRecyclerView.setAdapter(new ViewAdapter(mJSONArray));
-
-        }
-
-
-    }
+//    private class CallAPI extends AsyncTask<String, Integer, HttpResponse<JsonNode>> {
+//
+//        @Override
+//        protected HttpResponse<JsonNode> doInBackground(String... strings) {
+//            HttpResponse<JsonNode> request = null;
+//            try {
+//                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area={area}&level={level}")
+//                        .header("X-Mashape-Authorization", Constants.API_PRODUCTION_KEY)
+//                        .routeParam("area", mArea)
+//                        .routeParam("level", mLevel)
+//                        .asJson();
+//            } catch (UnirestException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return request;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
+//            super.onPostExecute(jsonResponse);
+//
+//            JSONObject jsonObject = jsonResponse.getBody().getObject();
+//            try {
+//                mJSONArray = jsonObject.getJSONArray("quizlist");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//            mQuizListRecyclerView.setAdapter(new ViewAdapter(mJSONArray));
+//
+//        }
+//
+//
+//    }
 
 
 
