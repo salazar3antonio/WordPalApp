@@ -3,23 +3,16 @@ package co.wordywordy.wordywordy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
-import co.wordywordy.wordywordy.data.QuizList;
-import co.wordywordy.wordywordy.data.api.QuizAPI;
 import co.wordywordy.wordywordy.data.model.Quiz;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class QuizSetupFragment extends Fragment {
@@ -31,7 +24,8 @@ public class QuizSetupFragment extends Fragment {
     private RadioGroup mAreaRadioGroup;
     private RadioGroup mLevelRadioGroup;
     private Button mTakeQuizButton;
-    private QuizList mQuizList;
+    private Quiz mQuiz;
+    private TextView mJSONtest;
 
     private JSONObject mJSONObject;
     private String mJSON_String;
@@ -56,29 +50,30 @@ public class QuizSetupFragment extends Fragment {
 
         //inflate view and pass in the container ViewGroup
         View view = inflater.inflate(R.layout.fragment_quiz_setup, container, false);
-        mQuizList = new QuizList();
+        mQuiz = new Quiz();
 
         mAreaRadioGroup = (RadioGroup) view.findViewById(R.id.area_radioGroup);
         mLevelRadioGroup = (RadioGroup) view.findViewById(R.id.level_radioGroup);
+        mJSONtest = (TextView) view.findViewById(R.id.jsonResponseText);
 
         mAreaRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (mAreaRadioGroup.getCheckedRadioButtonId()) {
                     case R.id.es_radio:
-                        mQuizList.setArea("es");
+                        mQuiz.setArea("es");
                         break;
                     case R.id.ms_radio:
-                        mQuizList.setArea("ms");
+                        mQuiz.setArea("ms");
                         break;
                     case R.id.hs_radio:
-                        mQuizList.setArea("hs");
+                        mQuiz.setArea("hs");
                         break;
                     case R.id.sat_radio:
-                        mQuizList.setArea("sat");
+                        mQuiz.setArea("sat");
                         break;
                     case R.id.all_radio:
-                        mQuizList.setArea("overall");
+                        mQuiz.setArea("overall");
                         break;
                 }
             }
@@ -89,19 +84,19 @@ public class QuizSetupFragment extends Fragment {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (mLevelRadioGroup.getCheckedRadioButtonId()) {
                     case R.id.two_radio:
-                        mQuizList.setLevel("2");
+                        mQuiz.setLevel(2);
                         break;
                     case R.id.four_radio:
-                        mQuizList.setLevel("4");
+                        mQuiz.setLevel(4);
                         break;
                     case R.id.six_radio:
-                        mQuizList.setLevel("6");
+                        mQuiz.setLevel(6);
                         break;
                     case R.id.eight_radio:
-                        mQuizList.setLevel("8");
+                        mQuiz.setLevel(8);
                         break;
                     case R.id.ten_radio:
-                        mQuizList.setLevel("10");
+                        mQuiz.setLevel(10);
                         break;
                 }
             }
@@ -112,31 +107,10 @@ public class QuizSetupFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(Constants.END_POINT_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                QuizAPI quizAPI = retrofit.create(QuizAPI.class);
-
-                Call<Quiz> quizes = quizAPI.getQuiz();
-                quizes.enqueue(new Callback<Quiz>() {
-                    @Override
-                    public void onResponse(Call<Quiz> call, Response<Quiz> response) {
-                        Log.d(TAG, response.toString() + call.toString());
-                    }
-
-                    @Override
-                    public void onFailure(Call<Quiz> call, Throwable t) {
-                        Log.d(TAG, t.getMessage());
-                    }
-                });
-
-
                 Intent intent = new Intent(getContext(), QuizListActivity.class);
-                intent.putExtra(AREA_SELECTED, mQuizList.getArea());
-                intent.putExtra(LEVEL_SELECTED, mQuizList.getLevel());
-             //   startActivity(intent);
+                intent.putExtra(AREA_SELECTED, mQuiz.getArea());
+                intent.putExtra(LEVEL_SELECTED, mQuiz.getLevel());
+                startActivity(intent);
 
             }
 

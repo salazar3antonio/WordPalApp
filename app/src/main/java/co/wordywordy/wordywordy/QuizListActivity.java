@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 public class QuizListActivity extends SingleFragmentActivity {
 
     private String mArea;
-    private String mLevel;
+    private int mLevel;
 
 
     @Override
@@ -18,7 +18,7 @@ public class QuizListActivity extends SingleFragmentActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mArea = bundle.getString(QuizSetupFragment.AREA_SELECTED);
-            mLevel = bundle.getString(QuizSetupFragment.LEVEL_SELECTED);
+            mLevel = bundle.getInt(QuizSetupFragment.LEVEL_SELECTED);
         }
 
         return QuizListFragment.newInstance(mArea, mLevel);

@@ -2,18 +2,25 @@ package co.wordywordy.wordywordy;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.List;
 
-import co.wordywordy.wordywordy.data.QuizList;
+import co.wordywordy.wordywordy.data.api.QuizAPI;
+import co.wordywordy.wordywordy.data.model.Quiz;
+import co.wordywordy.wordywordy.data.model.Quizlist;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class QuizListFragment extends Fragment {
@@ -31,21 +38,24 @@ public class QuizListFragment extends Fragment {
     private TextView mOptionOne;
     private TextView mOptionTwo;
     private TextView mOptionThree;
+    private String mChoiceOneText;
+    private String mChoiceTwoText;
+    private String mOptionOneText;
+    private String mOptionTwoText;
+    private String mOptionThreeText;
 
-    private JSONArray mJSONArray;
-    private JSONObject mJSONObject;
-    private String mJSONasString;
-    private QuizList mQuizList = new QuizList();
+    private List<Quizlist> mQuizlists;
+
 
     public QuizListFragment() {
         // Required empty public constructor
     }
 
-    public static QuizListFragment newInstance(String area, String level) {
+    public static QuizListFragment newInstance(String area, int level) {
         QuizListFragment fragment = new QuizListFragment();
         Bundle args = new Bundle();
         args.putString(AREA, area);
-        args.putString(LEVEL, level);
+        args.putInt(LEVEL, level);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,9 +79,30 @@ public class QuizListFragment extends Fragment {
 
         mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.END_POINT_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        QuizAPI quizAPI = retrofit.create(QuizAPI.class);
 
-        // Toast.makeText(getContext(), "Passed JSON " + mJSONasString, Toast.LENGTH_LONG).show();
+        final Call<Quiz> quizes = quizAPI.getQuiz("sat", 10);
+        quizes.enqueue(new Callback<Quiz>() {
+            @Override
+            public void onResponse(Call<Quiz> call, Response<Quiz> response) {
+                mQuizlists = response.body().getQuizlist();
+                Log.d(TAG, response.body().getResultMsg());
+
+                mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
+
+            }
+
+            @Override
+            public void onFailure(Call<Quiz> call, Throwable t) {
+                Log.d(TAG, t.getMessage());
+            }
+        });
 
         return view;
     }
@@ -91,8 +122,8 @@ public class QuizListFragment extends Fragment {
 
     public class ViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-        public ViewAdapter(JSONArray jsonArray) {
-            mJSONArray = jsonArray;
+        public ViewAdapter(List<Quizlist> quizlists) {
+            mQuizlists = quizlists;
         }
 
         @Override
@@ -104,60 +135,27 @@ public class QuizListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            String options = null;
-            try {
-                options = mJSONArray.getString(position);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            mOptionOne.setText(options);
+            mOptionOneText = mQuizlists.get(position).getQuiz().get(0);
+            mOptionTwoText = mQuizlists.get(position).getQuiz().get(1);
+            mOptionThreeText = mQuizlists.get(position).getQuiz().get(2);
+            mChoiceOneText = mQuizlists.get(position).getOption().get(0);
+            mChoiceTwoText = mQuizlists.get(position).getOption().get(1);
+
+
+            mOptionOne.setText(mOptionOneText);
+            mOptionTwo.setText(mOptionTwoText);
+            mOptionThree.setText(mOptionThreeText);
+            mChoiceOne.setText(mChoiceOneText);
+            mChoiceTwo.setText(mChoiceTwoText);
+
 
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return mQuizlists.size();
         }
     }
-
-//    private class CallAPI extends AsyncTask<String, Integer, HttpResponse<JsonNode>> {
-//
-//        @Override
-//        protected HttpResponse<JsonNode> doInBackground(String... strings) {
-//            HttpResponse<JsonNode> request = null;
-//            try {
-//                request = Unirest.get("https://twinword-word-association-quiz.p.mashape.com/type1/?area={area}&level={level}")
-//                        .header("X-Mashape-Authorization", Constants.API_PRODUCTION_KEY)
-//                        .routeParam("area", mArea)
-//                        .routeParam("level", mLevel)
-//                        .asJson();
-//            } catch (UnirestException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return request;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(HttpResponse<JsonNode> jsonResponse) {
-//            super.onPostExecute(jsonResponse);
-//
-//            JSONObject jsonObject = jsonResponse.getBody().getObject();
-//            try {
-//                mJSONArray = jsonObject.getJSONArray("quizlist");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//            mQuizListRecyclerView.setAdapter(new ViewAdapter(mJSONArray));
-//
-//        }
-//
-//
-//    }
-
-
 
 
 }

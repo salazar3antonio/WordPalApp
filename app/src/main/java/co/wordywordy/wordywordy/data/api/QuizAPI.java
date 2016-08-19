@@ -4,6 +4,7 @@ import co.wordywordy.wordywordy.data.model.Quiz;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Query;
 
 /**
  * Created by salaz on 8/16/2016.
@@ -15,8 +16,8 @@ public interface QuizAPI {
             "Accept: application/json"
     })
 
-    @GET("?area=es&level=10")
-    Call<Quiz> getQuiz();
+    @GET("?area=&level=")
+    Call<Quiz> getQuiz(@Query("area") String area, @Query("level") int level);
 
 
 
