@@ -6,14 +6,6 @@
               android:orientation="vertical"
               tools:context="co.wordywordy.wordywordy.QuizSetupFragment">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/jsonResponseText"
-        android:layout_gravity="center_horizontal"/>
-
     <RadioGroup
         android:id="@+id/area_radioGroup"
         android:layout_width="wrap_content"

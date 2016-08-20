@@ -2,77 +2,82 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:layout_marginBottom="5dp"
+              android:layout_marginTop="5dp"
               android:orientation="vertical"
-              tools:context=".QuizListFragment"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp">
+              tools:context=".QuizListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical">
 
 
         <TextView
-            android:id="@+id/optionOne"
+            android:id="@+id/quiz_word_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="23sp"
-            android:textStyle="normal"
-            android:text="option 1"
+            android:textSize="20sp"
+            tools:text="one"
             />
 
         <TextView
-            android:id="@+id/optionTwo"
+            android:id="@+id/quiz_word_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="23sp"
-            android:textStyle="normal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="option 2"/>
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="20sp"
+            tools:text="two"
+            />
 
         <TextView
-            android:id="@+id/optionThree"
+            android:id="@+id/quiz_word_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="23sp"
-            android:textStyle="normal"
-            android:text="option 3"/>
+            android:textSize="20sp"
+            tools:text="three"
+            />
 
     </LinearLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         >
 
-        <Button
-            android:id="@+id/choiceOne_button"
+        <RadioGroup
+            android:id="@+id/options_radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choice 1"
-            android:layout_marginRight="10dp"
-            android:textSize="25sp"/>
+            android:orientation="vertical"
+            >
 
-        <Button
-            android:id="@+id/choiceTwo_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:text="Choice 2"
+            <RadioButton
+                android:id="@+id/optionOne_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                tools:text="ONE"
+                android:textSize="18sp"/>
 
-            android:textSize="25sp"/>
+            <RadioButton
+                android:id="@+id/optionTwo_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                tools:text="TWO"
+                android:textSize="18sp"/>
 
+        </RadioGroup>
 
 
     </LinearLayout>

@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,16 +33,11 @@ public class QuizListFragment extends Fragment {
     private String mLevel;
 
     private RecyclerView mQuizListRecyclerView;
-    private Button mChoiceOne;
-    private Button mChoiceTwo;
-    private TextView mOptionOne;
-    private TextView mOptionTwo;
-    private TextView mOptionThree;
-    private String mChoiceOneText;
-    private String mChoiceTwoText;
-    private String mOptionOneText;
-    private String mOptionTwoText;
-    private String mOptionThreeText;
+    private RadioButton mOptionOne_radio;
+    private RadioButton mOptionTwo_radio;
+    private TextView mQuizWordOne;
+    private TextView mQuizWordTwo;
+    private TextView mQuizWordThree;
 
     private List<Quizlist> mQuizlists;
 
@@ -66,7 +61,7 @@ public class QuizListFragment extends Fragment {
         if (getArguments() != null) {
             mArea = getArguments().getString(AREA);
             mLevel = getArguments().getString(LEVEL);
-           // new CallAPI().execute();
+            // new CallAPI().execute();
 
         }
     }
@@ -90,11 +85,17 @@ public class QuizListFragment extends Fragment {
         quizes.enqueue(new Callback<Quiz>() {
             @Override
             public void onResponse(Call<Quiz> call, Response<Quiz> response) {
-                mQuizlists = response.body().getQuizlist();
-                Log.d(TAG, response.body().getResultMsg());
+                String logMsg = response.body().getResultMsg();
+                String logCode = response.body().getResultCode();
 
-                mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
+                if (logCode != "Success") {
+                    mQuizlists = response.body().getQuizlist();
+                    mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
+                    Log.d(TAG, logCode + " " + logMsg);
+                } else {
+                    Log.d(TAG, logCode + " " + logMsg);
+                }
 
             }
 
@@ -107,15 +108,15 @@ public class QuizListFragment extends Fragment {
         return view;
     }
 
-    public class ViewHolder  extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mOptionOne = (TextView) itemView.findViewById(R.id.optionOne);
-            mOptionTwo = (TextView) itemView.findViewById(R.id.optionTwo);
-            mOptionThree = (TextView) itemView.findViewById(R.id.optionThree);
-            mChoiceOne = (Button) itemView.findViewById(R.id.choiceOne_button);
-            mChoiceTwo = (Button) itemView.findViewById(R.id.choiceTwo_button);
+            mQuizWordOne = (TextView) itemView.findViewById(R.id.quiz_word_one);
+            mQuizWordTwo = (TextView) itemView.findViewById(R.id.quiz_word_two);
+            mQuizWordThree = (TextView) itemView.findViewById(R.id.quiz_word_three);
+            mOptionOne_radio = (RadioButton) itemView.findViewById(R.id.optionOne_radio);
+            mOptionTwo_radio = (RadioButton) itemView.findViewById(R.id.optionTwo_radio);
 
         }
     }
@@ -135,19 +136,17 @@ public class QuizListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            mOptionOneText = mQuizlists.get(position).getQuiz().get(0);
-            mOptionTwoText = mQuizlists.get(position).getQuiz().get(1);
-            mOptionThreeText = mQuizlists.get(position).getQuiz().get(2);
-            mChoiceOneText = mQuizlists.get(position).getOption().get(0);
-            mChoiceTwoText = mQuizlists.get(position).getOption().get(1);
+            String quizWordOne = mQuizlists.get(position).getQuiz().get(0);
+            String quizWordTwo = mQuizlists.get(position).getQuiz().get(1);
+            String quizWordThree = mQuizlists.get(position).getQuiz().get(2);
+            String optionOne = mQuizlists.get(position).getOption().get(0);
+            String optionTwo = mQuizlists.get(position).getOption().get(1);
 
-
-            mOptionOne.setText(mOptionOneText);
-            mOptionTwo.setText(mOptionTwoText);
-            mOptionThree.setText(mOptionThreeText);
-            mChoiceOne.setText(mChoiceOneText);
-            mChoiceTwo.setText(mChoiceTwoText);
-
+            mQuizWordOne.setText(quizWordOne);
+            mQuizWordTwo.setText(quizWordTwo);
+            mQuizWordThree.setText(quizWordThree);
+            mOptionOne_radio.setText(optionOne);
+            mOptionTwo_radio.setText(optionTwo);
 
         }
 

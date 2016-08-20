@@ -54,7 +54,6 @@ public class QuizSetupFragment extends Fragment {
 
         mAreaRadioGroup = (RadioGroup) view.findViewById(R.id.area_radioGroup);
         mLevelRadioGroup = (RadioGroup) view.findViewById(R.id.level_radioGroup);
-        mJSONtest = (TextView) view.findViewById(R.id.jsonResponseText);
 
         mAreaRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

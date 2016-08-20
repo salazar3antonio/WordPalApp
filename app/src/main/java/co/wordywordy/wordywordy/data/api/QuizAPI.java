@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 public interface QuizAPI {
 
     @Headers({
-            "X-Mashape-Key: VxKyScMn86mshAMSNaxk6IDI9bHQp1d13xnjsnPxFQYhKKEAMg",
+            "X-Mashape-Key: vW3qO4KKFzmshG18RMyOSxDElYFDp1uOXh2jsn3Dvf8Rv6jCqJ",
             "Accept: application/json"
     })
 
