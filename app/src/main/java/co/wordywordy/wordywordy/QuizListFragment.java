@@ -2,7 +2,10 @@ package co.wordywordy.wordywordy;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +44,9 @@ public class QuizListFragment extends Fragment {
 
     private List<Quizlist> mQuizlists;
 
+    private ViewPager mViewPager;
+    private PagerAdapter mPagerAdapter;
+
 
     public QuizListFragment() {
         // Required empty public constructor
@@ -61,7 +67,6 @@ public class QuizListFragment extends Fragment {
         if (getArguments() != null) {
             mArea = getArguments().getString(AREA);
             mLevel = getArguments().getString(LEVEL);
-            // new CallAPI().execute();
 
         }
     }
@@ -70,9 +75,12 @@ public class QuizListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
+        View view = inflater.inflate(R.layout.quiz_list_pager, container, false);
 
-        mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
+     //   mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
+        mViewPager = (ViewPager) view.findViewById(R.id.list_page);
+        mPagerAdapter = new QuizListPagerAdapter(getActivity().getSupportFragmentManager());
+        mViewPager.setAdapter(mPagerAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.END_POINT_URL)
@@ -82,6 +90,7 @@ public class QuizListFragment extends Fragment {
         QuizAPI quizAPI = retrofit.create(QuizAPI.class);
 
         final Call<Quiz> quizes = quizAPI.getQuiz("sat", 10);
+
         quizes.enqueue(new Callback<Quiz>() {
             @Override
             public void onResponse(Call<Quiz> call, Response<Quiz> response) {
@@ -90,8 +99,13 @@ public class QuizListFragment extends Fragment {
 
                 if (logCode != "Success") {
                     mQuizlists = response.body().getQuizlist();
-                    mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
+
+                 //   mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                 //   mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
+
+
+
+
                     Log.d(TAG, logCode + " " + logMsg);
                 } else {
                     Log.d(TAG, logCode + " " + logMsg);
@@ -155,6 +169,24 @@ public class QuizListFragment extends Fragment {
             return mQuizlists.size();
         }
     }
+
+    private class QuizListPagerAdapter extends FragmentStatePagerAdapter {
+
+        public QuizListPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return new QuizListItemFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return 10;
+        }
+    }
+
 
 
 }
