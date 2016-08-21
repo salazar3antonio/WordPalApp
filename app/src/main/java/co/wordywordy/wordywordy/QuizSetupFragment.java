@@ -25,10 +25,6 @@ public class QuizSetupFragment extends Fragment {
     private RadioGroup mLevelRadioGroup;
     private Button mTakeQuizButton;
     private Quiz mQuiz;
-    private TextView mJSONtest;
-
-    private JSONObject mJSONObject;
-    private String mJSON_String;
 
     public QuizSetupFragment() {
         // Required empty public constructor
@@ -50,10 +46,12 @@ public class QuizSetupFragment extends Fragment {
 
         //inflate view and pass in the container ViewGroup
         View view = inflater.inflate(R.layout.fragment_quiz_setup, container, false);
+
         mQuiz = new Quiz();
 
         mAreaRadioGroup = (RadioGroup) view.findViewById(R.id.area_radioGroup);
         mLevelRadioGroup = (RadioGroup) view.findViewById(R.id.level_radioGroup);
+        mTakeQuizButton = (Button) view.findViewById(R.id.take_quiz_button);
 
         mAreaRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -101,16 +99,13 @@ public class QuizSetupFragment extends Fragment {
             }
         });
 
-        mTakeQuizButton = (Button) view.findViewById(R.id.take_quiz_button);
         mTakeQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getContext(), QuizListActivity.class);
                 intent.putExtra(AREA_SELECTED, mQuiz.getArea());
                 intent.putExtra(LEVEL_SELECTED, mQuiz.getLevel());
                 startActivity(intent);
-
             }
 
         });

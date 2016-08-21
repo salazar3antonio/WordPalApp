@@ -32,23 +32,11 @@ public class QuizListFragment extends Fragment {
     public static final String LEVEL = "level";
 
     private String mArea;
-    private String mLevel;
-
+    private int mLevel;
     private RecyclerView mQuizListRecyclerView;
-    private RadioButton mOptionOne_radio;
-    private RadioButton mOptionTwo_radio;
-    private TextView mQuizWordOne;
-    private TextView mQuizWordTwo;
-    private TextView mQuizWordThree;
-
-    private String mQuizWord1;
-    private String mQuizWord2;
-    private String mQuizWord3;
-    private String mChoice1;
-    private String mChoice2;
-
     private List<Quizlist> mQuizlists;
     private Quizlist mQuizlist;
+
 
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
@@ -72,7 +60,7 @@ public class QuizListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mArea = getArguments().getString(AREA);
-            mLevel = getArguments().getString(LEVEL);
+            mLevel = getArguments().getInt(LEVEL);
 
         }
     }
@@ -92,7 +80,7 @@ public class QuizListFragment extends Fragment {
 
         QuizAPI quizAPI = retrofit.create(QuizAPI.class);
 
-        final Call<Quiz> quizes = quizAPI.getQuiz("sat", 10);
+        final Call<Quiz> quizes = quizAPI.getQuiz(mArea, mLevel);
 
         quizes.enqueue(new Callback<Quiz>() {
             @Override
@@ -102,14 +90,13 @@ public class QuizListFragment extends Fragment {
 
                 if (logCode != "Success") {
                     mQuizlists = response.body().getQuizlist();
-                    mQuizWord1 = mQuizlists.get(0).getQuiz().get(0);
                     mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
                     Log.d(TAG, logCode + " " + logMsg);
+                    Log.d(TAG, "Area is: " + mArea + " & " + "Level is: " + mLevel);
                 } else {
                     Log.d(TAG, logCode + " " + logMsg);
                 }
-
             }
 
             @Override
@@ -122,6 +109,12 @@ public class QuizListFragment extends Fragment {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+        private RadioButton mOptionOne_radio;
+        private RadioButton mOptionTwo_radio;
+        private TextView mQuizWordOne;
+        private TextView mQuizWordTwo;
+        private TextView mQuizWordThree;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -138,6 +131,8 @@ public class QuizListFragment extends Fragment {
             mQuizWordOne.setText(mQuizlist.getQuiz().get(0));
             mQuizWordTwo.setText(mQuizlist.getQuiz().get(1));
             mQuizWordThree.setText(mQuizlist.getQuiz().get(2));
+            mOptionOne_radio.setText(mQuizlist.getOption().get(0));
+            mOptionTwo_radio.setText(mQuizlist.getOption().get(1));
 
         }
     }
@@ -157,30 +152,14 @@ public class QuizListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-//            mQuizWord1 = mQuizlists.get(position).getQuiz().get(0);
-//            mQuizWord2 quizWordTwo = mQuizlists.get(position).getQuiz().get(1);
-//            mQuizWord3 quizWordThree = mQuizlists.get(position).getQuiz().get(2);
-//            mChoice1 = mQuizlists.get(position).getOption().get(0);
-//            mChoice2 optionTwo = mQuizlists.get(position).getOption().get(1);
-
             Quizlist quizlist = mQuizlists.get(position);
-            if (!quizlist.toString().isEmpty()) {
-                holder.bindQuizList(quizlist);
-            } else holder.bindQuizList(null);
-
-             // mQuizWordOne.setText(mQuizWord1);
-//            mQuizWordTwo.setText(quizWordTwo);
-//            mQuizWordThree.setText(quizWordThree);
-//            mOptionOne_radio.setText(optionOne);
-//            mOptionTwo_radio.setText(optionTwo);
-
-            Log.d(TAG, "onBindViewHolder Called");
-
+            holder.bindQuizList(quizlist);
         }
+
 
         @Override
         public int getItemCount() {
-            return 10;
+            return mQuizlists.size();
         }
     }
 
