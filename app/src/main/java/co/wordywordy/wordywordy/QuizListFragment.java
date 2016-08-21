@@ -2,10 +2,9 @@ package co.wordywordy.wordywordy;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +41,14 @@ public class QuizListFragment extends Fragment {
     private TextView mQuizWordTwo;
     private TextView mQuizWordThree;
 
+    private String mQuizWord1;
+    private String mQuizWord2;
+    private String mQuizWord3;
+    private String mChoice1;
+    private String mChoice2;
+
     private List<Quizlist> mQuizlists;
+    private Quizlist mQuizlist;
 
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
@@ -75,12 +81,9 @@ public class QuizListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.quiz_list_pager, container, false);
+        View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
 
-     //   mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
-        mViewPager = (ViewPager) view.findViewById(R.id.list_page);
-        mPagerAdapter = new QuizListPagerAdapter(getActivity().getSupportFragmentManager());
-        mViewPager.setAdapter(mPagerAdapter);
+        mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.END_POINT_URL)
@@ -99,13 +102,9 @@ public class QuizListFragment extends Fragment {
 
                 if (logCode != "Success") {
                     mQuizlists = response.body().getQuizlist();
-
-                 //   mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                 //   mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
-
-
-
-
+                    mQuizWord1 = mQuizlists.get(0).getQuiz().get(0);
+                    mQuizListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
                     Log.d(TAG, logCode + " " + logMsg);
                 } else {
                     Log.d(TAG, logCode + " " + logMsg);
@@ -133,6 +132,14 @@ public class QuizListFragment extends Fragment {
             mOptionTwo_radio = (RadioButton) itemView.findViewById(R.id.optionTwo_radio);
 
         }
+
+        public void bindQuizList(Quizlist quizlist) {
+            mQuizlist = quizlist;
+            mQuizWordOne.setText(mQuizlist.getQuiz().get(0));
+            mQuizWordTwo.setText(mQuizlist.getQuiz().get(1));
+            mQuizWordThree.setText(mQuizlist.getQuiz().get(2));
+
+        }
     }
 
     public class ViewAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -150,44 +157,32 @@ public class QuizListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            String quizWordOne = mQuizlists.get(position).getQuiz().get(0);
-            String quizWordTwo = mQuizlists.get(position).getQuiz().get(1);
-            String quizWordThree = mQuizlists.get(position).getQuiz().get(2);
-            String optionOne = mQuizlists.get(position).getOption().get(0);
-            String optionTwo = mQuizlists.get(position).getOption().get(1);
+//            mQuizWord1 = mQuizlists.get(position).getQuiz().get(0);
+//            mQuizWord2 quizWordTwo = mQuizlists.get(position).getQuiz().get(1);
+//            mQuizWord3 quizWordThree = mQuizlists.get(position).getQuiz().get(2);
+//            mChoice1 = mQuizlists.get(position).getOption().get(0);
+//            mChoice2 optionTwo = mQuizlists.get(position).getOption().get(1);
 
-            mQuizWordOne.setText(quizWordOne);
-            mQuizWordTwo.setText(quizWordTwo);
-            mQuizWordThree.setText(quizWordThree);
-            mOptionOne_radio.setText(optionOne);
-            mOptionTwo_radio.setText(optionTwo);
+            Quizlist quizlist = mQuizlists.get(position);
+            if (!quizlist.toString().isEmpty()) {
+                holder.bindQuizList(quizlist);
+            } else holder.bindQuizList(null);
+
+             // mQuizWordOne.setText(mQuizWord1);
+//            mQuizWordTwo.setText(quizWordTwo);
+//            mQuizWordThree.setText(quizWordThree);
+//            mOptionOne_radio.setText(optionOne);
+//            mOptionTwo_radio.setText(optionTwo);
+
+            Log.d(TAG, "onBindViewHolder Called");
 
         }
 
         @Override
         public int getItemCount() {
-            return mQuizlists.size();
-        }
-    }
-
-    private class QuizListPagerAdapter extends FragmentStatePagerAdapter {
-
-        public QuizListPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return new QuizListItemFragment();
-        }
-
-        @Override
-        public int getCount() {
             return 10;
         }
     }
-
-
 
 }
 
