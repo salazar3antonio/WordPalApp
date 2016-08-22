@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class QuizListFragment extends Fragment {
     private RecyclerView mQuizListRecyclerView;
     private List<Quizlist> mQuizlists;
     private Quizlist mQuizlist;
+    private int mCorrectAnswer;
 
 
     private ViewPager mViewPager;
@@ -61,7 +63,6 @@ public class QuizListFragment extends Fragment {
         if (getArguments() != null) {
             mArea = getArguments().getString(AREA);
             mLevel = getArguments().getInt(LEVEL);
-
         }
     }
 
@@ -70,7 +71,6 @@ public class QuizListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_quiz_list, container, false);
-
         mQuizListRecyclerView = (RecyclerView) view.findViewById(R.id.quiz_list_recyclerView);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -94,6 +94,7 @@ public class QuizListFragment extends Fragment {
                     mQuizListRecyclerView.setAdapter(new ViewAdapter(mQuizlists));
                     Log.d(TAG, logCode + " " + logMsg);
                     Log.d(TAG, "Area is: " + mArea + " & " + "Level is: " + mLevel);
+
                 } else {
                     Log.d(TAG, logCode + " " + logMsg);
                 }
@@ -109,9 +110,9 @@ public class QuizListFragment extends Fragment {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         private RadioButton mOptionOne_radio;
         private RadioButton mOptionTwo_radio;
+        private RadioGroup mOptionsRadioGroup;
         private TextView mQuizWordOne;
         private TextView mQuizWordTwo;
         private TextView mQuizWordThree;
@@ -128,12 +129,12 @@ public class QuizListFragment extends Fragment {
 
         public void bindQuizList(Quizlist quizlist) {
             mQuizlist = quizlist;
+            mCorrectAnswer = mQuizlist.getCorrect();
             mQuizWordOne.setText(mQuizlist.getQuiz().get(0));
             mQuizWordTwo.setText(mQuizlist.getQuiz().get(1));
             mQuizWordThree.setText(mQuizlist.getQuiz().get(2));
             mOptionOne_radio.setText(mQuizlist.getOption().get(0));
             mOptionTwo_radio.setText(mQuizlist.getOption().get(1));
-
         }
     }
 
@@ -156,11 +157,14 @@ public class QuizListFragment extends Fragment {
             holder.bindQuizList(quizlist);
         }
 
-
         @Override
         public int getItemCount() {
             return mQuizlists.size();
         }
+    }
+
+    public boolean isOptionCorrect() {
+        return true;
     }
 
 }
