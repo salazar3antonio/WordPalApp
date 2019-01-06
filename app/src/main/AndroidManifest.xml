@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="co.wordywordy.wordywordy"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="co.wordpal.mywordpalappfree">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -10,16 +11,64 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="PLACE_AD_ID_HERE"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.BrandedLaunch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".QuizListActivity">
-
-        </activity>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.quiz_list.QuizListActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.menu.SettingsActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.quiz_report.QuizReportActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/QuizReportTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.elementary.ElementaryAreaActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ElementaryTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.middleschool.MiddleSchoolAreaActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MiddleSchoolTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.highschool.HighSchoolAreaActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/HighSchoolTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.sat.SatAreaActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SatTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.gmat.GmatAreaActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/GmatTheme"/>
+        <activity
+            android:name="co.wordpal.mywordpalappfree.overall.OverallAreaActivity"
+            android:parentActivityName="co.wordpal.mywordpalappfree.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/OverallTheme"/>
     </application>
 
 </manifest>

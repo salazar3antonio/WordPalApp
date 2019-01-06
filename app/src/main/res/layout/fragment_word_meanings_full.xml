@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:id="@+id/level_click"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical|center_horizontal"
+                                    android:layout_margin="10dp"
+                                    android:foreground="?android:attr/selectableItemBackground"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/selected_word"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".9"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="mask"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1"
+                android:gravity="end">
+
+                <CheckBox
+                    android:id="@+id/fav_word_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/heart_checkbox_state"
+                    android:buttonTint="@color/colorAccent"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/noun_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/noun_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/noun_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/noun_meaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="a covering to disguise or conceal the face"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/verb_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/verb_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/verb_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/verb_meaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="a covering to disguise or conceal the face"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/adverb_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/adverb_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/adverb_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/adverb_meaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="a covering to disguise or conceal the face"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/adjective_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/adjective_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/adjective_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/adjective_meaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                tools:text="a covering to disguise or conceal the face"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+

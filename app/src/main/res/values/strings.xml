@@ -1,39 +1,62 @@
 <resources>
-    <string name="app_name">Wordy Wordy</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Word Pal</string>
 
     <string name="take_quiz">Take Quiz!</string>
+    <string name="quiz_report_title">Quiz Report</string>
+    <string name="noun_text">noun</string>
+    <string name="verb_text">verb</string>
+    <string name="learn_more">Learn More</string>
+    <string name="adverb_text">adverb</string>
+    <string name="adjective_text">adjective</string>
+    <string name="take_quizs_text">Take Quiz</string>
+    <string name="review_quiz">Review Quiz</string>
+    <string name="unlocked">Unlocked</string>
+    <string name="locked">LOCKED</string>
+    <string name="score_quiz_report">Score</string>
+    <string name="points_quiz_report">Points</string>
+    <string name="correct_quiz_report">Correct</string>
+    <string name="_10">/10</string>
 
-    <string-array name="area_choice_spinner">
-        <item>ES</item>
-        <item>MS</item>
-        <item>HS</item>
-        <item>SAT</item>
-        <item>GRE</item>
-    </string-array>
+    <!--app id from ad mob-->
+    <string name="app_id_admob">PLACE_ID_HERE</string>
 
-    <string name="area_choice_text">
-        ES - Elementary School
-        \nMS - Middle School
-        \nHS - High School
-        \nSAT - Scholastic Assessment Test
-        \nGRE - Graduate Record Examinations
-        \nGMAT - Graduate Management Admission Test
-        \nTEPS - Test of English Proficiency
-        \nTOEIC - Test of English for International Communication
-        \nTOEFL - Test of English as a Foreign Language
-        \nIELTS - International English Language Testing Service
-        \nKSAT - Korean College Scholastic Ability Test
-    </string>
+    <!--testing ad unit id-->
+    <string name="testing_ad_unit_id">PLACE_ID_HERE</string>
 
-    <string-array name="level_choice_spinner">
-        <item>2</item>
-        <item>4</item>
-        <item>6</item>
-        <item>8</item>
-        <item>10</item>
-    </string-array>
+    <!--all ad unit ids-->
+    <string name="es_levels_ad_unit_id">PLACE_ID_HERE</string>
+    <string name="ms_levels_ad_unit_id">PLACE_ID_HERE</string>
+    <string name="hs_levels_ad_unit_id">PLACE_ID_HERE</string>
+    <string name="sat_levels_ad_unit_id">PLACE_ID_HERE</string>
+    <string name="gmat_levels_ad_unit_id">PLACE_ID_HERE</string>
+    <string name="overall_levels_ad_unit_id">PLACE_ID_HERE</string>
+    <string name="main_areas_ad_unit_id">PLACE_ID_HERE</string>
+
+    <string name="or">or</string>
+    <string name="no_fav_words_title">No saved words just yet.</string>
+    <string name="no_fav_words_caption"><![CDATA[Review a quiz. Press & hold a word choice. Check the heart.]]></string>
+    <string name="is_to">is to…</string>
+    <string name="es_title">ELEMENTARY</string>
+    <string name="es_title_caption">Words for the kiddos.</string>
+    <string name="_0">0</string>
+    <string name="_25">/25</string>
+    <string name="ms_title">MIDDLE SCHOOL</string>
+    <string name="ms_title_caption">Kinda in the middle words.</string>
+    <string name="_35">/35</string>
+    <string name="hs_title">HIGH SCHOOL</string>
+    <string name="hs_title_caption">Graduated words for a graduate.</string>
+    <string name="_45">/45</string>
+    <string name="sat_title">SAT</string>
+    <string name="sat_title_acro">Scholastic Assessment Test</string>
+    <string name="sat_title_caption">Words you never knew existed.</string>
+    <string name="_50">/50</string>
+    <string name="gmat_title">GMAT</string>
+    <string name="gmat_title_acro">Graduate Management Admission Test</string>
+    <string name="gmat_title_caption">Extra tough words.</string>
+    <string name="overall_title">OVERALL</string>
+    <string name="overall_title_caption">Well-rounded wordsmith words.</string>
+    <string name="quiz_report_help">Press &amp; Hold a word choice for its meaning.</string>
+    <string name="bonus_points_text">Bonus Points</string>
+
 
 </resources>

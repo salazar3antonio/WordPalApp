@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:summary="Thank you!"
+        android:title="Remove Ads">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://play.google.com/store/apps/details?id=co.wordpal.mywordpalapppaid" />
+    </Preference>
+
+    <Preference
+        android:summary="www.flaticon.com/authors/prosymbols"
+        android:title="Icons by Prosymbols">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="http://www.flaticon.com/authors/prosymbols" />
+    </Preference>
+
+    <Preference
+        android:summary="www.flaticon.com/authors/freepik"
+        android:title="Icons by Freepik">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="http://www.flaticon.com/authors/freepik" />
+    </Preference>
+
+    <Preference
+        android:summary="View our privacy policy"
+        android:title="Privacy Policy">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://www.freeprivacypolicy.com/privacy/view/8ae82bae505fda25123554e96648c563" />
+    </Preference>
+
+</PreferenceScreen>

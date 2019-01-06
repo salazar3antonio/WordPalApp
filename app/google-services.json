@@ -1,0 +1,151 @@
+{
+  "project_info": {
+    "project_number": "257046695815",
+    "firebase_url": "https://word-pal.firebaseio.com",
+    "project_id": "word-pal",
+    "storage_bucket": "word-pal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257046695815:android:ca10492200da8df8",
+        "android_client_info": {
+          "package_name": "co.wordpal.mywordpalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257046695815-pg9tt5p6g47uugc2m1s9gdtmj58n1s7l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.wordpal.mywordpalapp",
+            "certificate_hash": "ba295c3a19b307ef4dfc8cc41e77576d2d070b66"
+          }
+        },
+        {
+          "client_id": "257046695815-42f6rs4at4t2ac9oh54l6qb75h3mlj3s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.wordpal.mywordpalapp",
+            "certificate_hash": "5b7ff5fa7ff5bce4b14d32c171dcccfa109356d0"
+          }
+        },
+        {
+          "client_id": "257046695815-sbemsoavaaf5onr1823ghmkl563er9nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClqW2mAsdxDkBxlS-4_PCDnEh5_K2rSC0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257046695815-sbemsoavaaf5onr1823ghmkl563er9nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257046695815:android:e062e42842eeb73c",
+        "android_client_info": {
+          "package_name": "co.wordpal.mywordpalappfree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257046695815-s9b1j6s8rv619g5i861ebg7i80h36bj0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.wordpal.mywordpalappfree",
+            "certificate_hash": "ba295c3a19b307ef4dfc8cc41e77576d2d070b66"
+          }
+        },
+        {
+          "client_id": "257046695815-sbemsoavaaf5onr1823ghmkl563er9nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClqW2mAsdxDkBxlS-4_PCDnEh5_K2rSC0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257046695815-sbemsoavaaf5onr1823ghmkl563er9nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257046695815:android:4e76f0f1b2c7542b",
+        "android_client_info": {
+          "package_name": "co.wordpal.mywordpalapppaid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257046695815-30g3oont38mblvdp1fee2l2paqk7os0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.wordpal.mywordpalapppaid",
+            "certificate_hash": "ba295c3a19b307ef4dfc8cc41e77576d2d070b66"
+          }
+        },
+        {
+          "client_id": "257046695815-sbemsoavaaf5onr1823ghmkl563er9nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClqW2mAsdxDkBxlS-4_PCDnEh5_K2rSC0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257046695815-sbemsoavaaf5onr1823ghmkl563er9nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

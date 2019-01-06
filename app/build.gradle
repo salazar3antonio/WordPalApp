@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
-
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "co.wordywordy.wordywordy"
-        minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        applicationId 'co.wordpal.mywordpalappfree'
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
@@ -17,16 +16,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:support-v4:24.1.1'
-    compile 'com.android.support:design:24.1.1'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile project(':view_pager_indicator')
+    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'com.android.support:support-v4:28.0.0'
+    compile 'com.android.support:design:28.0.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'org.glassfish:javax.annotation:10.0-b28'
-    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:cardview-v7:28.0.0'
+    compile 'com.android.support.constraint:constraint-layout:2.0.0-alpha2'
+    compile 'com.google.firebase:firebase-ads:17.1.1'
+    compile 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.android.gms:play-services-ads:17.1.1'
+    testCompile 'junit:junit:4.12'
 }
+
+
+
+apply plugin: 'com.google.gms.google-services'
